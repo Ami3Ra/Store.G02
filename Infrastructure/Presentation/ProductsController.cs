@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction;
+using Shared;
 
 namespace Presentation
 {
@@ -15,10 +16,15 @@ namespace Presentation
     {
         // endpoint : Public non-static method
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+
+        // sort : nameasc [default]
+        // sort : namedesc
+        // sort : priceDesc
+        // sort : priceAsc
+        [HttpGet] // GET: /api/Products
+        public async Task<IActionResult> GetAllProducts([FromQuery] ProductSpecificationsParamters specParams)
         {
-            var result = await serviceManager.ProductService.GetAllProductsAsync();
+            var result = await serviceManager.ProductService.GetAllProductsAsync(specParams);
             if (result is null) return BadRequest(); // 400
             return Ok(result); // 200
         }
@@ -32,6 +38,21 @@ namespace Presentation
         }
 
         // TODO : Get All Brands
+        [HttpGet("brands")]// GET: /api/Products/brands
+        public async Task<IActionResult> GetAllBrands()
+        {
+          var result = await serviceManager.ProductService.GetAllBrandsAsync();
+          if (result is null) return BadRequest();  // 400
+            return Ok(result);  // 200
+        }
+
         // TODO : Get All Types
+        [HttpGet("types")]// GET: /api/Products/types
+        public async Task<IActionResult> GetAllTypes()
+        {
+            var result = await serviceManager.ProductService.GetAllTypesAsync();
+            if (result is null) return BadRequest();  // 400
+            return Ok(result);  // 200
+        }
     }
 }
