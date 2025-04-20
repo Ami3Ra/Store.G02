@@ -10,7 +10,8 @@ using Persistance.Data;
 
 namespace Persistance.Repositories
 {
-    public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> where TEntity : BaseEntity<TKey>
+    public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey> 
+        where TEntity : BaseEntity<TKey>
     {
         private readonly StoreDbContext _context;
 
