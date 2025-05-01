@@ -44,7 +44,7 @@ namespace Persistance.Repositories
         }
 
 
-        public async Task AddAsyns(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
             await _context.AddAsync(entity);
         }
